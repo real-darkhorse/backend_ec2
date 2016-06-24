@@ -92,10 +92,10 @@ function get_time() {
 	return $timestamp;
 }
 
-function log_action($title, $content) {
-	$time = get_time();
-	$query = "INSERT INTO tbl_log (title, content, time) ";
-	$query .= "VALUES ('$title', '$content', '$time')";
+function login_log($donator_id) {
+	$date = date('Y-m-d');
+	$query = "INSERT INTO tbl_login (donator_id, date) ";
+	$query .= "VALUES ('" . $donator_id . "','" . $date . "')";
 
 	sql($query);
 }

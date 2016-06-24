@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "123";
-$dbname = "deedio_db";
+$dbname = "deedio";
 
 $conn = mysql_connect($host, $user, $pass);
 

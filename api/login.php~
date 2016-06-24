@@ -1,6 +1,7 @@
 <?php
-include("functions.php");
-include("db.php");
+
+include("common/functions.php");
+include("common/db.php");
 
 $data = $_REQUEST;
 $require_params = array("username", "password");
@@ -10,35 +11,36 @@ foreach($require_params as $rp)
 		die(json_encode(array("res" => 301, "msg" => "Require Parameters!!!")));
 }
 
-$username = $data['username'];
-$password = $data['password'];
+$username = mysql_escape_string($data['username']);
+$password = mysql_escape_string(md5($data['password']));
 
-$users = get_all("select * from tbl_user where ( username='$username' or email='$username' ) and active='1'");
+$users = get_all("select * from tbl_donator where username='$username' and active='1'");
 if (count($users) == 0) {
     die(json_encode(array("res" => 311, "msg" => "Invalid user!!!")));
 }
 
-$sql = "select * from tbl_user ";
+$sql = "select * from tbl_donator ";
 $sql .= " where username='$username' ";
 $sql .= " and password='$password' ";
 $sql .= " and active='1' ";
 
 $users = get_all($sql);
-if (count($users) > 0) { 
-    $hash = $users[0]['hash'];
-    $user_id = $users[0]['id'];
-	$firstname = $users[0]['firstname'];
-	$lastname = $users[0]['lastname'];
-	$username = $users[0]['username'];
-	$email = $users[0]['email'];
-	$mobile = $users[0]['mobile'];
-
-    $res = array("res" => 200, "msg" => "Success", "user_id" => "$user_id", "hash" => "$hash", "firstname" => "$firstname", "lastname" => "$lastname", "username" => "$username", "email" => "$email", "mobile" => "$mobile");
-
-	log_action("login", "$username login");
+if (count($users) == 0) {
+    die(json_encode(array("res" => 301, "msg" => "Invalid password!!!")));
 }
-else 
-    $res = array("res" => 301, "msg" => "Invalid password!!!");
+
+	$user = $users[0];
+    $hash = $user['hash'];
+    $user_id = $user['id'];
+	$firstname = $user['name_first'];
+	$lastname = $user['name_last'];
+	$username = $user['username'];
+	$email = $user['email'];
+	$phone = $user['phone'];
+
+	login_log($user_id);
+
+    $res = array("res" => 200, "msg" => "Success", "user_id" => "$user_id", "hash" => "$hash", "firstname" => "$firstname", "lastname" => "$lastname", "username" => "$username", "email" => "$email", "phone" => "$phone");
 
 echo json_encode($res);
 ?>
