@@ -48,28 +48,28 @@ sql($query);
 $user_id = mysql_insert_id();
 
 //Send Verify mail
-/*
-$to      = $email; // Send email to our user
-$subject = 'Signup | Verification'; // Give the email a subject 
+$title = "Sign-Up Confirmation";
 $message = '
  
-Thanks for signing up!
-Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
- 
-------------------------
-Username: '.$firstname.' '.$lastname.'
-Password: '.$password.'
-------------------------
- 
+Thank you for being part of our journey, contributing to the better cause using a secure and simplified process.
+You can now start contributing and sharing to the world.
+Your deeds will be notable and appreciated for all in need. 
+
 Please click this link to activate your account:
-http://192.168.3.60/verify.php?email='.$email.'&hash='.$hash.'
- 
+http://192.168.3.60/deedio/api/verify.php?email='.$email.'&hash='.$hash.'
+
+Sincerely,  
+Deedio
+
+--------------------------------------------------------------------------------------------
+This email was sent to ' . $username . ' by Deedio.
+Deedio is a product of Deedio LLC., 801 Idaho Ave., Unit 9, Santa Monica, CA 90403.
+You are receiving this email because you are subscribed to one or more of Deedio’s services.
 '; // Our message above including the link
-                     
-$headers = 'From:noreply@yourwebsite.com' . "\r\n"; // Set from headers
-mail($to, $subject, $message, $headers); // Send our email
-//*/
-send_mail();
+
+$addr = array();
+$addr[] = $email;
+send_mail1($title, $message, "", $addr);
 
 $res = array("res" => 200, "msg" => "Success", "user_id" => "$user_id", "hash" => "$hash");
 echo json_encode($res);
