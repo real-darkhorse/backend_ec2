@@ -1,0 +1,4 @@
+INSERT INTO tbl_user (name_first, name_last, username, email, mobile, password, hash) VALUES ('fname1','lname1','fname1 lname1','darkhorse.star@yahoo.com','1111111','098f6bcd4621d373cade4e832627b4f6','fc3cf452d3da8402bebb765225ce8c0e',
+INSERT INTO tb_user (name_first, name_last, username, email, mobile, password, hash) VALUES ('fname1','lname1','fname1 lname1','darkhorse.star@yahoo.com','1111111','098f6bcd4621d373cade4e832627b4f6','d2ed45a52bc0edfa11c2064e9edee8bf',
+INSERT INTO tb_user (name_first, name_last, username, email, mobile, password, hash) VALUES ('fname1','lname1','fname1 lname1','darkhorse.star@yahoo.com','1111111','098f6bcd4621d373cade4e832627b4f6','149e9677a5989fd342ae44213df68868' )
+INSERT INTO tb_user (name_first, name_last, username, email, mobile, password, hash) VALUES ('11112','2222','11112 2222','aaa2a@aaaa.com','1111','47bce5c74f589f4867dbd57e9ca9f808','7eabe3a1649ffa2b3ff8c02ebfd5659f' )
