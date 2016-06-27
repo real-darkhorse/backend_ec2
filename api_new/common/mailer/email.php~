@@ -5,7 +5,7 @@ require 'PHPMailerAutoload.php';
 function send_mail1 ($title, $body, $attach, $mailbox) { // Yahoo mail send
 
 	$mail = new PHPMailer ();
-	$mail->IsSMTP();
+        $mail->IsSMTP();
 	$mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
 	$mail->SMTPAuth = true; // enable SMTP authentication
 	$mail->SMTPSecure = "ssl"; 

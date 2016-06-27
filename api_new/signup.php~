@@ -21,7 +21,7 @@ $email = $data['email'];
 $phone = $data['phone'];
 $password = $data['password'];
 
-$users = get_all("select * from tbl_donator where email='$email'");
+$users = get_all("select * from tbl_donator where email='$email' or username='$username'");
 
 if (count($users) > 0) {
     $user = $users[0];
