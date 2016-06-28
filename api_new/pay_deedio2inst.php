@@ -1,9 +1,9 @@
 <?php
 
-include("functions.php");
-include("db.php");
+include("common/functions.php");
+include("common/db.php");
 include("common/mailer/email.php");
-include("anet-sdk-php/PaymentTransactions/charge-credit-card.php");
+//include("anet-sdk-php/PaymentTransactions/charge-credit-card.php");
 
 $data = $_REQUEST;
 $require_params = array("user_id", "amount", "inst_id", "pay_type", "hash");
@@ -71,6 +71,7 @@ $query .= ", '" . $bank_name . "'";
 sql($query);
 $last_id = mysql_insert_id(); // inserted id for verification after payment processing
 
+/*
 // Do payment
 if (pay_type == 'credit') { //Credit card case
 	//chargeCreditCard_d2i($amount, $card_number, $exp_date, $card_code, $desc='New Donation');
@@ -98,7 +99,7 @@ if (pay_type == 'credit') { //Credit card case
 		}
 	} else { // payment false
 		die(json_encode(array("res" => 311, "msg" => "Payment error!!!")));
-	}//*/
+	}//
 } else if (pay_type == 'paypal'){ //Paypal case
 	/*	
 	$ret = debitBankAccount_d2i($last_id, $amount*0.9511, $mloginid, $mtrankey);
@@ -111,7 +112,7 @@ if (pay_type == 'credit') { //Credit card case
 		}
 	} else { // payment false
 		die(json_encode(array("res" => 311, "msg" => "Payment error!!!")));
-	}//*/
+	}//
 } else if (pay_type == 'applepay'){ //Paypal case
 	/*	
 	$ret = debitBankAccount_d2i($last_id, $amount*0.9511, $mloginid, $mtrankey);
@@ -124,8 +125,9 @@ if (pay_type == 'credit') { //Credit card case
 		}
 	} else { // payment false
 		die(json_encode(array("res" => 311, "msg" => "Payment error!!!")));
-	}//*/
-}
+	}//
+}//*/
+$res = array("res" => 200, "msg" => "Success");
 echo json_encode($res);
 exit;
 
