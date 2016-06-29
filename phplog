@@ -1,0 +1,97 @@
+
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [execute] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/api/controller/base/ApiOperationBase.php : 112) - Request Serialization Begin
+ Wed, 29 Jun 2016 06:03:12 -0700 DEBUG : [execute] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/api/controller/base/ApiOperationBase.php : 113) - net\authorize\api\contract\v1\CreateTransactionRequest Object
+(
+    [transactionRequest:net\authorize\api\contract\v1\CreateTransactionRequest:private] => net\authorize\api\contract\v1\TransactionRequestType Object
+        (
+            [transactionType:net\authorize\api\contract\v1\TransactionRequestType:private] => authCaptureTransaction
+            [amount:net\authorize\api\contract\v1\TransactionRequestType:private] => 12.23
+            [currencyCode:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [payment:net\authorize\api\contract\v1\TransactionRequestType:private] => net\authorize\api\contract\v1\PaymentType Object
+                (
+                    [creditCard:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [bankAccount:net\authorize\api\contract\v1\PaymentType:private] => net\authorize\api\contract\v1\BankAccountType Object
+                        (
+                            [accountType:net\authorize\api\contract\v1\BankAccountType:private] => 
+                            [routingNumber:net\authorize\api\contract\v1\BankAccountType:private] => 121042882
+                            [accountNumber:net\authorize\api\contract\v1\BankAccountType:private] => xxxx-9123
+                            [nameOnAccount:net\authorize\api\contract\v1\BankAccountType:private] => xxxx
+                            [echeckType:net\authorize\api\contract\v1\BankAccountType:private] => WEB
+                            [bankName:net\authorize\api\contract\v1\BankAccountType:private] => Bank of the Earth
+                            [checkNumber:net\authorize\api\contract\v1\BankAccountType:private] => 
+                        )
+
+                    [trackData:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [encryptedTrackData:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [payPal:net\authorize\api\contract\v1\PaymentType:private] => 
+                    [opaqueData:net\authorize\api\contract\v1\PaymentType:private] => 
+                )
+
+            [profile:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [solution:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [callId:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [authCode:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [refTransId:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [splitTenderId:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [order:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [lineItems:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [tax:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [duty:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [shipping:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [taxExempt:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [poNumber:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [customer:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [billTo:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [shipTo:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [customerIP:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [cardholderAuthentication:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [retail:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [employeeId:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [transactionSettings:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+            [userFields:net\authorize\api\contract\v1\TransactionRequestType:private] => 
+        )
+
+    [merchantAuthentication:net\authorize\api\contract\v1\ANetApiRequestType:private] => net\authorize\api\contract\v1\MerchantAuthenticationType Object
+        (
+            [name:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 579pVv3RQ2Zk
+            [transactionKey:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => xxxx
+            [sessionToken:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [password:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [impersonationAuthentication:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [fingerPrint:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+            [mobileDeviceId:net\authorize\api\contract\v1\MerchantAuthenticationType:private] => 
+        )
+
+    [refId:net\authorize\api\contract\v1\ANetApiRequestType:private] => ref1467205392
+)
+
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [execute] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/api/controller/base/ApiOperationBase.php : 115) - Request  Serialization End
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [_sendRequest] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/util/HttpClient.php : 75) -  Url: https://apitest.authorize.net/xml/v1/request.api
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [_sendRequest] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/util/HttpClient.php : 77) - Request to AnetApi: 
+<?xml version="1.0" encoding="UTF-8"?>
+<createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+  <merchantAuthentication>
+    <name><![CDATA[579pVv3RQ2Zk]]></name>
+    <transactionKey>xxxx</transactionKey>
+  </merchantAuthentication>
+  <refId><![CDATA[ref1467205392]]></refId>
+  <transactionRequest>
+    <transactionType><![CDATA[authCaptureTransaction]]></transactionType>
+    <amount>12.23</amount>
+    <payment>
+      <bankAccount>
+        <routingNumber><![CDATA[121042882]]></routingNumber>
+        <accountNumber>xxxx-9123</accountNumber>
+        <nameOnAccount>xxxx</nameOnAccount>
+        <echeckType><![CDATA[WEB]]></echeckType>
+        <bankName><![CDATA[Bank of the Earth]]></bankName>
+      </bankAccount>
+    </payment>
+  </transactionRequest>
+</createTransactionRequest>
+
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [_sendRequest] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/util/HttpClient.php : 89) - Sending 'XML' Request type
+ Wed, 29 Jun 2016 06:03:12 -0700 INFO : [_sendRequest] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/util/HttpClient.php : 94) - Sending http request via Curl
+ Wed, 29 Jun 2016 06:03:17 -0700 INFO : [_sendRequest] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/util/HttpClient.php : 96) - Response from AnetApi: ﻿<?xml version="1.0" encoding="utf-8"?><createTransactionResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"><refId>ref1467205392</refId><messages><resultCode>Error</resultCode><message><code>E00007</code><text>User authentication failed due to invalid authentication values.</text></message></messages><transactionResponse /></createTransactionResponse>
+ Wed, 29 Jun 2016 06:03:17 -0700 INFO : [execute] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/api/controller/base/ApiOperationBase.php : 125) - Response De-Serialization Begin
+ Wed, 29 Jun 2016 06:03:17 -0700 INFO : [execute] (/var/www/html/deedio/api_new/anet-sdk-php/vendor/authorizenet/authorizenet/lib/net/authorize/api/controller/base/ApiOperationBase.php : 127) - Response De-Serialization End
