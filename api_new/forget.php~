@@ -6,6 +6,38 @@ include("common/db.php");
 include("common/mailer/email.php");
 
 $data = $_REQUEST;
+$require_params = array("email");
+
+foreach($require_params as $rp)
+{
+	if (!isset($data["$rp"]) || trim($data["$rp"]) == "")
+		die(json_encode(array("res" => 301, "msg" => "Require Parameters!!!")));
+}
+
+$email = $data['email'];
+
+$users = get_all("select * from tbl_donator where email='$email' and active='1'");
+if (count($users) == 0) {
+    die(json_encode(array("res" => 311, "msg" => "Invalid user!!!")));
+}
+
+$user = $users[0];
+
+$hash = $user['hash'];
+$firstname = $user['name_first'];
+$lastname = $user['name_last'];
+
+//Send Verify mail
+if (!sendmail_forgetpwd ($email, $firstname, $lastname, $hash)) {
+    die(json_encode(array("res" => 331, "msg" => "Mail error!!!")));
+}
+// return response
+$res = array("res" => 200, "msg" => "Success");
+echo json_encode($res);
+exit;
+
+/*
+$data = $_REQUEST;
 $require_params = array("email", "password");
 
 foreach($require_params as $rp)
@@ -55,5 +87,5 @@ if (!send_mail1($title, $message, "", $addr)) {
 $res = array("res" => 200, "msg" => "Success");
 echo json_encode($res);
 exit;
-
+*/
 ?>

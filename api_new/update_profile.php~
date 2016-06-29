@@ -20,8 +20,8 @@ $lastname = $data['lastname'];
 $username = $data['username'];
 $email = $data['email'];
 $phone = $data['phone'];
-$old_password = $data['old_password'];
-$new_password = $data['new_password'];
+$old_password = md5($data['old_password']);
+$new_password = md5($data['new_password']);
 
 $users = get_all("select * from tbl_donator where id='$user_id' and hash='$hash' and active='1'");
 if (count($users) == 0) {

@@ -34,7 +34,7 @@ if (count($users) > 0) {
 $hash = md5( rand(0,1000) );
    
 //Send Verify mail
-if (!sendmail_usersignup ($email, $firstname, $lastname, $user_id, $hash)) {
+if (!sendmail_usersignup ($email, $firstname, $lastname, $hash)) {
     die(json_encode(array("res" => 331, "msg" => "Mail error!!!")));
 }
 
@@ -50,6 +50,7 @@ $query .= "'" . mysql_escape_string($hash) . "' )";
 
 sql($query);
 $user_id = mysql_insert_id();
+
 
 // return response
 $res = array("res" => 200, "msg" => "Success", "user_id" => "$user_id", "hash" => "$hash");

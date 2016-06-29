@@ -5,7 +5,7 @@ include("common/functions.php");
 include("common/db.php");
 
 $data = $_REQUEST;
-$require_params = array("email", "hash", "key");
+$require_params = array("email", "hash", "password");
 foreach($require_params as $rp)
 {
 	if (!isset($data["$rp"]) || trim($data["$rp"]) == "")
@@ -14,19 +14,20 @@ foreach($require_params as $rp)
 
 $email = mysql_escape_string($data['email']); // Set email variable
 $hash = mysql_escape_string($data['hash']); // Set hash variable
-$key = mysql_escape_string($data['hash']); // crypt passsword
+$pwd = mysql_escape_string(md5($data['password'])); // Set hash variable
 
 $users = get_all("select * from tbl_donator where active='1' and email='".$email."' AND hash='".$hash."'");
-if (count($users) > 0) {
-    $user = $users[0];
-
-	$query = "UPDATE `tbl_donator` set `password`='".$key."' where `id`='$user_id' limit 1";
-	sql($query);
-	$res = array("res" => 200, "msg" => "Success", "sql" => $query);
-} else {
-	$res = array("res" => 302, "msg" => "invalid verification!");
+if (count($users) == 0) {
+	die(json_encode(array("res" => 311, "msg" => "Invalid code.")));
 }
-    
+
+$user = $users[0];
+$user_id = $user['id'];
+
+$query = "UPDATE `tbl_donator` set `password`='$pwd' where `id`='$user_id' limit 1";
+sql($query);
+$res = array("res" => 200, "msg" => "Success", "sql" => $query);
+
 echo json_encode($res);
 exit;
 ?>
