@@ -3,9 +3,9 @@
 include("common/functions.php");
 include("common/db.php");
 include("common/mailer/email.php");
-include("anet-sdk-php/vendor/charge-credit-card.php");
-include("anet-sdk-php/vendor/debit-bank-account.php");
-include("anet-sdk-php/vendor/create-an-apple-pay-transaction.php");
+include("anet-sdk/vendor/charge-credit-card.php");
+include("anet-sdk/vendor/debit-bank-account.php");
+include("anet-sdk/vendor/create-an-apple-pay-transaction.php");
 
 
 $data = $_REQUEST;

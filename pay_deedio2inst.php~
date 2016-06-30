@@ -65,11 +65,9 @@ if ($pay_type == 'credit') { //Credit card case
     //credit_do2de($card_number, $exp_date, $card_code, $amount, $desc="User payment");
 	$ret = credit_do2de($card_number, $exp_date, $card_code, $amount); //Do payment from donator to Deedio
 
-	$card4 = $card_number;	
-	if (strlen($card_number) > 4)
-		$card4 = substr($card_number, -4);
-
 	if ($ret['res'] == 'success'){ //payment success
+		if (strlen($card_number) > 4 )
+			$card_number = "XXXX-".substr($card_number, -4, 4);
 		//Save log to transaction table
 		$query = "INSERT INTO tbl_transaction (donator_id, total_amount, bucket_489, bucket_9511, date, time, confirmation, receiver_institution, cc_ach, cc_brand, cc, ach, bank_name) VALUES (";
 		$query .= "'" . $user_id . "'";
@@ -80,7 +78,7 @@ if ($pay_type == 'credit') { //Credit card case
 		$query .= ", '" . $cur_time . "'";
 		$query .= ", '" . $ret['trans_id'] . "'";
 		$query .= ", '" . $instname . "'";
-		$query .= ", '" . $card4 . "'";
+		$query .= ", '" . $card_number . "'";
 		$query .= ", '" . "cc_brand" . "'";
 		$query .= ", '" . $card_code . "'";
 		$query .= ", '" . "ach" . "'";
@@ -89,7 +87,7 @@ if ($pay_type == 'credit') { //Credit card case
 		sql($query);
 		
 		//send payment success mail - sendmail_paysuccess($firstname, $lastname, $email, $instname, $confirm_num, $date, $pay_method, $acc_num, $acc_holder, $amount)
-		if (sendmail_paysuccess($firstname, $lastname, $email, $instname, $ret['trans_id'], $date, "Credit Card", $card4, $card_code, $amount)) {
+		if (sendmail_paysuccess($firstname, $lastname, $email, $instname, $ret['trans_id'], $date, "Credit Card", $card_number, $card_code, $amount)) {
 			$res = array("res" => 200, "msg" => "Success");
 		} else {
 			$res = array("res" => 200, "msg" => "Payment Success, but mail send failed");
@@ -99,7 +97,7 @@ if ($pay_type == 'credit') { //Credit card case
 	}
 
 
-} else if ($pay_type == 'bank'){ //Debit Bank case
+} else if (pay_type == 'bank'){ //Debit Bank case
 	/////////////////////////////////////////////////////////////////////////////////////
 	/// Debit bank payment
 	/// debit_do2de($amount, $routing_no, $account_no, $name_on_account, $bank_name)
@@ -121,11 +119,9 @@ if ($pay_type == 'credit') { //Credit card case
 	//debit_do2de($amount, $routing_no, $account_no, $name_on_account, $bank_name)
 	$ret = debit_do2de($amount, $routing_no, $acc_no, $name_on_acc, $bank_name);
 
-	$acc4 = $account_no;	
-	if (strlen($account_no) > 4)
-		$card4 = substr($account_no, -4);
-
 	if ($ret['res'] == 'success'){ //payment success
+		if (strlen($account_no) > 4 )
+			$account_no = "XXXX-".substr($account_no, -4, 4);
 		//Save log to transaction table
 		$query = "INSERT INTO tbl_transaction (donator_id, total_amount, bucket_489, bucket_9511, date, time, confirmation, receiver_institution, cc_ach, cc_brand, cc, ach, bank_name) VALUES (";
 		$query .= "'" . $user_id . "'";
@@ -136,7 +132,7 @@ if ($pay_type == 'credit') { //Credit card case
 		$query .= ", '" . $cur_time . "'";
 		$query .= ", '" . $ret['trans_id'] . "'";
 		$query .= ", '" . $instname . "'";
-		$query .= ", '" . $acc4 . "'";
+		$query .= ", '" . $account_no . "'";
 		$query .= ", '" . $name_on_account . "'";
 		$query .= ", '" . $routing_no . "'";
 		$query .= ", '" . "ach" . "'";
@@ -146,7 +142,7 @@ if ($pay_type == 'credit') { //Credit card case
 
 
 		//send payment success mail - sendmail_paysuccess($firstname, $lastname, $email, $instname, $confirm_num, $date, $pay_method, $acc_num, $acc_holder, $amount)
-		if (sendmail_paysuccess($firstname, $lastname, $email, $instname, $ret['trans_id'], $date, "Bank", $acc4, $name_on_account, $amount)) {
+		if (sendmail_paysuccess($firstname, $lastname, $email, $instname, $ret['trans_id'], $date, "Bank", $account_no, $name_on_account, $amount)) {
 			$res = array("res" => 200, "msg" => "Success");
 		} else {
 			$res = array("res" => 200, "msg" => "Payment Success, but mail send failed");
@@ -157,7 +153,7 @@ if ($pay_type == 'credit') { //Credit card case
 	}
 
 
-} else if ($pay_type == 'applepay'){ // Applepay case
+} else if (pay_type == 'applepay'){ // Applepay case
 	/////////////////////////////////////////////////////////////////////////////////////
 	/// Apple pay payment
 	/// createAnApplePayTransaction($amount)
@@ -196,11 +192,10 @@ if ($pay_type == 'credit') { //Credit card case
 		die(json_encode(array("res" => 311, "msg" => $ret['error'])));
 	}
 
-} else if ($pay_type == 'paypal'){ //Paypal case
+} else if (pay_type == 'paypal'){ //Paypal case
 	/////////////////////////////////////////////////////////////////////////////////////
 	
 	//Parameter check
-	/*
 	$require_params = array("routing_no", "account_no", "name_on_account", "bank_name");
 
 	foreach($require_params as $rp)
@@ -212,10 +207,10 @@ if ($pay_type == 'credit') { //Credit card case
 	$account_no = $data['account_no'];
 	$name_on_account = $data['name_on_account'];
 	$bank_name = $data['bank_name'];
-	*/
-	$acc4 = $account_no;	
-	if (strlen($account_no) > 4)
-		$card4 = substr($account_no, -4);
+
+		if (strlen($account_no) > 4 )
+			$account_no = "XXXX-".substr($account_no, -4, 4);
+	
 
 		//Save log to transaction table
 		$query = "INSERT INTO tbl_transaction (donator_id, total_amount, bucket_489, bucket_9511, date, time, confirmation, receiver_institution, cc_ach, cc_brand, cc, ach, bank_name) VALUES (";
@@ -243,7 +238,6 @@ if ($pay_type == 'credit') { //Credit card case
 			$res = array("res" => 200, "msg" => "Payment Success, but mail send failed");
 		}
 }
-
 //$res = array("res" => 200, "msg" => "Success");
 echo json_encode($res);
 exit;
