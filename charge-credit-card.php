@@ -21,11 +21,11 @@
       $paymentOne->setCreditCard($creditCard);
 
       $order = new AnetAPI\OrderType();
-      $order->setDescription($desc);//"New Donation"
+      $order->setDescription("New Item");
 
       //create a transaction
       $transactionRequestType = new AnetAPI\TransactionRequestType();
-      $transactionRequestType->setTransactionType( "authCaptureTransaction");
+      $transactionRequestType->setTransactionType( "authCaptureTransaction"); 
       $transactionRequestType->setAmount($amount);
       $transactionRequestType->setOrder($order);
       $transactionRequestType->setPayment($paymentOne);
@@ -37,14 +37,13 @@
       $request->setTransactionRequest( $transactionRequestType);
       $controller = new AnetController\CreateTransactionController($request);
       $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
-
-	$result = array();//result retrun value
-
-	 if ($response != null)
-     {
+      
+	  $result = array();//result retrun value
+	  if ($response != null)
+      {
         $tresponse = $response->getTransactionResponse();
 
-        if (($tresponse != null) && ($tresponse->getResponseCode()== \SampleCode\Constants::RESPONSE_OK) )
+        if (($tresponse != null) && ($tresponse->getResponseCode()== \SampleCode\Constants::RESPONSE_OK) )   
         {
 			$result['res'] = 'success';
 			$result['auth_code'] = $tresponse->getAuthCode();
@@ -53,26 +52,22 @@
         }
         else
         {
-			$result['res'] = 'error';
+            $result['res'] = 'error';
 			$result['code'] = 1;
 			$result['error'] = "Charge Credit Card ERROR :  Invalid response";
 			return $result;
         }
-
-     }
-     else
+        
+      }
+      else
       {
-			$result['res'] = 'error';
+        	$result['res'] = 'error';
 			$result['code'] = 2;
 			$result['error'] = "Charge Credit card Null response returned";
 			return $result;
       }
-
-	return $response;
+      return $response;
   }
-
-  /*
-  if(!defined('DONT_RUN_SAMPLES'))
-      credit_do2de("4111111111111111","1226","123", \SampleCode\Constants::SAMPLE_AMOUNT);
-  //*/
+  //if(!defined('DONT_RUN_SAMPLES'))
+      //chargeCreditCard(123);
 ?>
